@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scribbling Arms — Banking & Digital Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off: #f7f8fc;
+      --surface: #f0f3f9;
+      --blue-deep: #1a2b52;
+      --blue: #1e3a6e;
+      --blue-mid: #2c5282;
+      --blue-accent: #3b6cb7;
+      --blue-light: #e8eef8;
+      --slate: #64748b;
+      --muted: #94a3b8;
+      --border: #dde3ef;
+      --ink: #0f1c36;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Manrope', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      padding: 1rem 5rem;
+      box-shadow: 0 2px 24px rgba(26,43,82,0.07);
+    }
+
+    .logo {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 500;
+      color: var(--blue-deep);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo-mark {
+      width: 32px; height: 32px;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: white;
+      font-style: italic;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--slate);
+      text-decoration: none;
+      transition: color 0.22s;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-cta {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--blue);
+      border: none;
+      padding: 0.7rem 1.7rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.22s, transform 0.2s;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover { background: var(--blue-mid); transform: translateY(-1px); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 9rem 5rem 5rem;
+      gap: 5rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(160deg, #f0f4fb 0%, #e8eef8 100%);
+      z-index: 0;
+      clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+      background: var(--blue-light);
+      border: 1px solid #c5d5ef;
+      padding: 0.4rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.6rem;
+      animation: fadeUp 0.7s ease 0.25s both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--slate);
+      line-height: 1.85;
+      max-width: 460px;
+      margin-bottom: 2.8rem;
+      animation: fadeUp 0.7s ease 0.4s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      animation: fadeUp 0.7s ease 0.55s both;
+    }
+
+    .btn-primary {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      background: var(--blue);
+      border: none;
+      padding: 0.95rem 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.22s, transform 0.2s, box-shadow 0.22s;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(30,58,110,0.22);
+    }
+
+    .btn-ghost {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--blue);
+      background: transparent;
+      border: 1.5px solid var(--blue-accent);
+      padding: 0.95rem 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.22s, color 0.22s;
+    }
+
+    .btn-ghost:hover { background: var(--blue-light); }
+
+    .hero-right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      animation: fadeUp 0.7s ease 0.4s both;
+    }
+
+    .hero-stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .hero-stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.8rem;
+      box-shadow: 0 2px 12px rgba(26,43,82,0.06);
+    }
+
+    .hsc-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--blue-deep);
+      line-height: 1;
+      display: block;
+    }
+
+    .hsc-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+      display: block;
+    }
+
+    .hero-banner {
+      background: var(--blue);
+      border-radius: 4px;
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .hb-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .hb-text .hb-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.2rem;
+    }
+
+    .hb-text .hb-sub {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--off);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.6rem 5rem;
+      display: flex;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .trust-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .trust-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    .trust-logos {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .trust-logo {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      transition: color 0.22s;
+    }
+
+    .trust-logo:hover { color: var(--blue); }
+
+    /* ─── SECTION COMMONS ─── */
+    section { padding: 7rem 5rem; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title em { font-style: italic; color: var(--blue); }
+
+    .section-body {
+      font-size: 0.97rem;
+      color: var(--slate);
+      line-height: 1.85;
+      max-width: 520px;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      background: var(--off);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 3rem;
+    }
+
+    .pillar {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.8rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: padding-left 0.25s;
+    }
+
+    .pillar:first-child { border-top: 1px solid var(--border); }
+    .pillar:hover { padding-left: 0.5rem; }
+
+    .pillar-num {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--blue-accent);
+      padding-top: 0.2rem;
+      min-width: 28px;
+    }
+
+    .pillar-text h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .pillar-text p {
+      font-size: 0.82rem;
+      color: var(--slate);
+      line-height: 1.7;
+    }
+
+    .about-visual {
+      position: relative;
+      height: 500px;
+    }
+
+    .av-main {
+      position: absolute;
+      inset: 0 0 80px 0;
+      background: var(--blue);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2.5rem;
+      overflow: hidden;
+    }
+
+    .av-main::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -20%;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 65%);
+    }
+
+    .av-quote {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.55;
+      position: relative;
+      z-index: 1;
+    }
+
+    .av-author {
+      margin-top: 1rem;
+      font-size: 0.76rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    .av-float {
+      position: absolute;
+      bottom: 0; right: 2.5rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 8px 32px rgba(26,43,82,0.1);
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .av-float-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .av-float-label {
+      font-size: 0.73rem;
+      font-weight: 500;
+      color: var(--slate);
+      line-height: 1.4;
+    }
+
+    /* ─── SERVICES ─── */
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3.5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.5rem;
+      background: var(--white);
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    .service-card:hover {
+      border-color: #c5d5ef;
+      box-shadow: 0 8px 32px rgba(26,43,82,0.09);
+      transform: translateY(-3px);
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .svc-icon {
+      width: 48px; height: 48px;
+      background: var(--blue-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-card h3 {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      font-size: 0.84rem;
+      color: var(--slate);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .svc-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--blue-accent);
+      background: var(--blue-light);
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+
+    /* ─── BANKING ─── */
+    .banking {
+      background: var(--blue-deep);
+      color: white;
+    }
+
+    .banking .section-label { color: rgba(255,255,255,0.5); }
+    .banking .section-title { color: white; }
+    .banking .section-title em { color: #7da7e8; }
+    .banking .section-body { color: rgba(255,255,255,0.6); }
+
+    .banking-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+
+    .bank-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .bank-feat {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      padding: 1.6rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: flex-start;
+      transition: background 0.25s;
+    }
+
+    .bank-feat:hover { background: rgba(255,255,255,0.08); }
+
+    .bf-icon {
+      font-size: 1.4rem;
+      min-width: 2rem;
+      margin-top: 0.1rem;
+    }
+
+    .bf-body h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.35rem;
+    }
+
+    .bf-body p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    .banking-right { display: flex; flex-direction: column; gap: 1.2rem; }
+
+    .bank-card {
+      border-radius: 8px;
+      padding: 2.5rem;
+      background: linear-gradient(135deg, #1e3a6e, #2c5282);
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bank-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; right: -15%;
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06), transparent 65%);
+    }
+
+    .bc-chip {
+      width: 42px; height: 32px;
+      background: linear-gradient(135deg, #c8a84a, #e5c55c);
+      border-radius: 5px;
+      margin-bottom: 2rem;
+    }
+
+    .bc-num {
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1.8rem;
+    }
+
+    .bc-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .bc-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.25rem; }
+    .bc-val { font-size: 0.88rem; font-weight: 500; color: white; }
+    .bc-logo { font-family: var(--serif); font-size: 1.2rem; font-style: italic; color: rgba(255,255,255,0.8); }
+
+    .bank-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bm-item {
+      background: rgba(255,255,255,0.04);
+      padding: 1.4rem;
+      text-align: center;
+    }
+
+    .bm-val {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      color: white;
+      display: block;
+    }
+
+    .bm-label {
+      font-size: 0.67rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-top: 0.25rem;
+      display: block;
+    }
+
+    /* ─── PROCESS ─── */
+    .process { background: var(--off); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2.5rem;
+      margin-top: 4rem;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 1.3rem;
+      left: calc(12.5% + 1.5rem);
+      right: calc(12.5% + 1.5rem);
+      height: 1px;
+      background: var(--border);
+    }
+
+    .pstep { position: relative; }
+
+    .pstep-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: white;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pstep h4 {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.65rem;
+    }
+
+    .pstep p {
+      font-size: 0.82rem;
+      color: var(--slate);
+      line-height: 1.75;
+    }
+
+    /* ─── TECH ─── */
+    .tech-section { padding: 5rem; background: var(--white); }
+
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 2.5rem;
+    }
+
+    .tech-pill {
+      font-family: var(--mono);
+      font-size: 0.73rem;
+      letter-spacing: 0.06em;
+      color: var(--blue-mid);
+      border: 1.5px solid var(--border);
+      padding: 0.5rem 1.1rem;
+      border-radius: 100px;
+      background: var(--white);
+      transition: background 0.22s, border-color 0.22s;
+    }
+
+    .tech-pill:hover {
+      background: var(--blue-light);
+      border-color: #c5d5ef;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials { background: var(--off); }
+
+    .testi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testi-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2.2rem;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+
+    .testi-card:hover {
+      box-shadow: 0 6px 28px rgba(26,43,82,0.08);
+      transform: translateY(-2px);
+    }
+
+    .testi-stars {
+      display: flex;
+      gap: 2px;
+      color: #c8a84a;
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .testi-card blockquote {
+      font-family: var(--serif);
+      font-size: 0.98rem;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+
+    .testi-author { display: flex; align-items: center; gap: 0.9rem; }
+
+    .testi-av {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: white;
+      font-style: italic;
+      flex-shrink: 0;
+    }
+
+    .testi-name { font-size: 0.84rem; font-weight: 600; color: var(--ink); }
+    .testi-role { font-size: 0.74rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      background: var(--blue);
+      padding: 7rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -20%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 65%);
+    }
+
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      bottom: -50%; right: -20%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.04), transparent 65%);
+    }
+
+    .cta-section .section-label { color: rgba(255,255,255,0.5); }
+    .cta-section .section-title { color: white; max-width: 700px; margin: 0 auto 1rem; }
+    .cta-section .section-title em { color: #7da7e8; }
+    .cta-section .section-body { color: rgba(255,255,255,0.6); margin: 0 auto 3rem; text-align: center; }
+
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; position: relative; z-index: 1; }
+
+    .btn-white {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      background: var(--white);
+      border: none;
+      padding: 0.95rem 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.22s, transform 0.2s;
+    }
+
+    .btn-white:hover { background: var(--off); transform: translateY(-2px); }
+
+    .btn-ghost-white {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: white;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      padding: 0.95rem 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.22s, background 0.22s;
+    }
+
+    .btn-ghost-white:hover {
+      border-color: rgba(255,255,255,0.65);
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--ink);
+      padding: 5rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand .logo { color: white; margin-bottom: 1.2rem; display: flex; }
+    .footer-brand .logo-mark { background: var(--blue-accent); }
+    .footer-desc { font-size: 0.84rem; color: rgba(255,255,255,0.4); line-height: 1.85; max-width: 260px; }
+
+    .footer-col h5 {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-col ul a {
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.22s;
+    }
+
+    .footer-col ul a:hover { color: white; }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copy { font-size: 0.76rem; color: rgba(255,255,255,0.3); }
+
+    .footer-legal { display: flex; gap: 2rem; }
+
+    .footer-legal a {
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.22s;
+    }
+
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      nav { padding: 1.2rem 2.5rem; }
+      nav.scrolled { padding: 0.9rem 2.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 2.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 8rem 2.5rem 4rem; gap: 3rem; }
+      .hero::after { display: none; }
+      .about { grid-template-columns: 1fr; }
+      .about-visual { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .banking-inner { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .trust-bar { padding: 1.2rem 2.5rem; gap: 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.4rem; }
+      .hero-actions { flex-direction: column; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .hero-stat-row { grid-template-columns: 1fr 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      .tech-section { padding: 4rem 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#" class="logo">
+      <div class="logo-mark">S</div>
+      Scribbling Arms
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#banking">Banking</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Banking · Development · Innovation</div>
+      <h1>Where <em>Finance</em><br/>Meets Digital<br/>Excellence</h1>
+      <p class="hero-sub">Scribbling Arms is a dual-force company building proprietary banking products and delivering world-class web and application development — under one trusted roof.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Explore Our Services</a>
+        <a href="#banking" class="btn-ghost">Our Banking Products</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-row">
+        <div class="hero-stat-card">
+          <span class="hsc-num">80+</span>
+          <span class="hsc-label">Clients Served</span>
+        </div>
+        <div class="hero-stat-card">
+          <span class="hsc-num">99.9%</span>
+          <span class="hsc-label">Platform Uptime</span>
+        </div>
+        <div class="hero-stat-card">
+          <span class="hsc-num">12+</span>
+          <span class="hsc-label">Banking Products</span>
+        </div>
+        <div class="hero-stat-card">
+          <span class="hsc-num">5★</span>
+          <span class="hsc-label">Avg. Client Rating</span>
+        </div>
+      </div>
+      <div class="hero-banner">
+        <div class="hb-icon">🔐</div>
+        <div class="hb-text">
+          <div class="hb-title">ISO 27001 & PCI-DSS Certified</div>
+          <div class="hb-sub">Bank-grade security across every product we build</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <span class="trust-label">Trusted by</span>
+    <div class="trust-divider"></div>
+    <div class="trust-logos">
+      <span class="trust-logo">FinBridge</span>
+      <span class="trust-logo">NordCommerce</span>
+      <span class="trust-logo">PayStack Lite</span>
+      <span class="trust-logo">VentureNow</span>
+      <span class="trust-logo">ClearBank</span>
+      <span class="trust-logo">Apexio</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="reveal">
+      <span class="section-label">Who We Are</span>
+      <h2 class="section-title">Built on <em>Trust</em>,<br/>Driven by Precision</h2>
+      <p class="section-body">Scribbling Arms was founded at the intersection of financial technology and elite software engineering. We operate two core divisions — a banking product studio and a full-spectrum digital development arm — giving clients access to both deep fintech expertise and cutting-edge web capability.</p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-text">
+            <h4>Security Without Compromise</h4>
+            <p>Bank-grade encryption, compliance frameworks, and zero-trust architecture built into every layer.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-text">
+            <h4>Speed to Market</h4>
+            <p>Agile delivery cycles that bring products to market fast, without sacrificing quality or reliability.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-text">
+            <h4>Long-Term Partnership</h4>
+            <p>We embed into your mission — not just your sprint. Your growth is our primary metric.</p>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">04</div>
+          <div class="pillar-text">
+            <h4>Global Compliance Standards</h4>
+            <p>Products built to meet regulatory requirements across multiple jurisdictions from day one.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="av-main">
+        <div class="av-quote">"We don't just build technology. We build the trust infrastructure that makes businesses thrive."</div>
+        <div class="av-author">— Scribbling Arms Founding Principle</div>
+      </div>
+      <div class="av-float">
+        <div class="av-float-num">2025</div>
+        <div class="av-float-label">Founded with<br/>a clear purpose</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header reveal">
+      <div>
+        <span class="section-label">Our Services</span>
+        <h2 class="section-title">What We <em>Build</em></h2>
+      </div>
+      <a href="#contact" class="btn-ghost">All Services →</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="svc-icon">🏦</div>
+        <h3>Banking Product Development</h3>
+        <p>End-to-end design and engineering of proprietary banking products — from core banking systems to neobank platforms and payment rails.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Core Banking</span>
+          <span class="svc-tag">Payments</span>
+          <span class="svc-tag">Compliance</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="svc-icon">💻</div>
+        <h3>Web Application Development</h3>
+        <p>Full-cycle development of scalable, performant, and beautifully engineered web applications — from concept to production.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">SaaS Platforms</span>
+          <span class="svc-tag">Portals</span>
+          <span class="svc-tag">APIs</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="svc-icon">📱</div>
+        <h3>Mobile App Engineering</h3>
+        <p>Native and cross-platform mobile apps engineered for reliability, speed, and exceptional experience across iOS and Android.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">iOS & Android</span>
+          <span class="svc-tag">React Native</span>
+          <span class="svc-tag">Flutter</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="svc-icon">🛒</div>
+        <h3>E-Commerce Solutions</h3>
+        <p>Complete e-commerce platforms with payment integration, inventory systems, and conversion-focused design built to scale.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Custom Storefront</span>
+          <span class="svc-tag">Payments</span>
+          <span class="svc-tag">Analytics</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="svc-icon">☁️</div>
+        <h3>Cloud & DevOps</h3>
+        <p>Infrastructure that scales seamlessly. We architect, migrate, and manage cloud environments with zero-downtime pipelines.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">AWS / GCP</span>
+          <span class="svc-tag">Kubernetes</span>
+          <span class="svc-tag">CI/CD</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="svc-icon">🎨</div>
+        <h3>UI/UX Design Systems</h3>
+        <p>Research-driven design that converts. We create intuitive interfaces refined for accessibility and elevating your brand.</p>
+        <div class="svc-tags">
+          <span class="svc-tag">Design Systems</span>
+          <span class="svc-tag">Figma</span>
+          <span class="svc-tag">Accessibility</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process" class="process">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">How We Work</span>
+      <h2 class="section-title">Our <em>Delivery</em> Framework</h2>
+      <p class="section-body" style="margin: 0 auto;">Every engagement follows our proven four-phase process — structured enough to be reliable, flexible enough to adapt to your reality.</p>
+    </div>
+    <div class="process-steps">
+      <div class="pstep reveal">
+        <div class="pstep-num">01</div>
+        <h4>Discovery & Strategy</h4>
+        <p>We deeply understand your business goals, technical environment, and regulatory landscape to define the right strategic path forward.</p>
+      </div>
+      <div class="pstep reveal">
+        <div class="pstep-num">02</div>
+        <h4>Architecture & Design</h4>
+        <p>System architecture and user experience are mapped in detail before a single line of code — eliminating costly course corrections later.</p>
+      </div>
+      <div class="pstep reveal">
+        <div class="pstep-num">03</div>
+        <h4>Build & Iterate</h4>
+        <p>Transparent agile sprints. Real progress weekly, with room to refine and evolve the product as you see it come to life.</p>
+      </div>
+      <div class="pstep reveal">
+        <div class="pstep-num">04</div>
+        <h4>Launch & Scale</h4>
+        <p>We deploy with precision and remain your long-term partner — monitoring, evolving, and scaling your platform as you grow.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANKING -->
+  <section id="banking" class="banking">
+    <div class="reveal">
+      <span class="section-label">Banking Division</span>
+      <h2 class="section-title">Our Proprietary <em>Banking</em> Products</h2>
+      <p class="section-body">Beyond client work, Scribbling Arms develops and operates its own suite of financial products — giving us unmatched first-hand insight into building banking at scale.</p>
+    </div>
+    <div class="banking-inner">
+      <div class="bank-features reveal">
+        <div class="bank-feat">
+          <div class="bf-icon">💳</div>
+          <div class="bf-body">
+            <h4>SA Card Platform</h4>
+            <p>Prepaid and debit card issuance with real-time controls, virtual card generation, and full multi-currency support.</p>
+          </div>
+        </div>
+        <div class="bank-feat">
+          <div class="bf-icon">🔄</div>
+          <div class="bf-body">
+            <h4>Instant Transfer Rails</h4>
+            <p>Proprietary payment infrastructure enabling domestic and cross-border transfers settled in seconds.</p>
+          </div>
+        </div>
+        <div class="bank-feat">
+          <div class="bf-icon">📊</div>
+          <div class="bf-body">
+            <h4>Smart Account Intelligence</h4>
+            <p>AI-driven account management with spending analytics, automated saving rules, and real-time goal tracking.</p>
+          </div>
+        </div>
+        <div class="bank-feat">
+          <div class="bf-icon">🛡️</div>
+          <div class="bf-body">
+            <h4>Fraud Detection Engine</h4>
+            <p>Machine learning-powered fraud detection with sub-100ms decision latency, protecting every transaction in real time.</p>
+          </div>
+        </div>
+      </div>
+      <div class="banking-right reveal">
+        <div class="bank-card">
+          <div class="bc-chip"></div>
+          <div class="bc-num">5921 •••• •••• 8843</div>
+          <div class="bc-bottom">
+            <div>
+              <div class="bc-label">Card Holder</div>
+              <div class="bc-val">SA Premium</div>
+            </div>
+            <div class="bc-logo">SA</div>
+          </div>
+        </div>
+        <div class="bank-metrics">
+          <div class="bm-item">
+            <span class="bm-val">$3.2M</span>
+            <span class="bm-label">Processed</span>
+          </div>
+          <div class="bm-item">
+            <span class="bm-val">99.98%</span>
+            <span class="bm-label">Uptime</span>
+          </div>
+          <div class="bm-item">
+            <span class="bm-val">&lt;0.2s</span>
+            <span class="bm-label">Transfer Speed</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <div class="tech-section reveal">
+    <span class="section-label">Technology Stack</span>
+    <div class="tech-grid">
+      <span class="tech-pill">React</span>
+      <span class="tech-pill">Next.js</span>
+      <span class="tech-pill">Node.js</span>
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">PostgreSQL</span>
+      <span class="tech-pill">Redis</span>
+      <span class="tech-pill">Kafka</span>
+      <span class="tech-pill">GraphQL</span>
+      <span class="tech-pill">Kubernetes</span>
+      <span class="tech-pill">AWS</span>
+      <span class="tech-pill">GCP</span>
+      <span class="tech-pill">Swift</span>
+      <span class="tech-pill">Kotlin</span>
+      <span class="tech-pill">Flutter</span>
+      <span class="tech-pill">Stripe</span>
+      <span class="tech-pill">Terraform</span>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="testi-header reveal">
+      <div>
+        <span class="section-label">Client Voices</span>
+        <h2 class="section-title">What Our Clients <em>Say</em></h2>
+      </div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <blockquote>"Scribbling Arms delivered our core banking integration in record time. Their understanding of financial systems is genuinely rare in a tech partner."</blockquote>
+        <div class="testi-author">
+          <div class="testi-av">A</div>
+          <div>
+            <div class="testi-name">Arjun Mehta</div>
+            <div class="testi-role">CTO, FinBridge Capital</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <blockquote>"The web platform they built tripled our conversion rate in 3 months. Exceptional design, rock-solid engineering, and a team that truly listens."</blockquote>
+        <div class="testi-author">
+          <div class="testi-av">S</div>
+          <div>
+            <div class="testi-name">Sara Lindqvist</div>
+            <div class="testi-role">CEO, NordCommerce</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <blockquote>"From discovery to launch in 12 weeks. Scribbling Arms thinks like founders, not just developers. That makes all the difference."</blockquote>
+        <div class="testi-author">
+          <div class="testi-av">K</div>
+          <div>
+            <div class="testi-name">Kwame Asante</div>
+            <div class="testi-role">Founder, ClearPay Africa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="cta-section">
+    <span class="section-label">Let's Build Together</span>
+    <h2 class="section-title">Ready to Start <em>Something</em><br/>That Matters?</h2>
+    <p class="section-body">Whether you're launching a new banking product, rebuilding a digital platform, or starting from zero — Scribbling Arms is the partner that delivers with precision and purpose.</p>
+    <div class="cta-actions">
+      <a href="mailto:hello@scribblingarms.com" class="btn-white">Schedule a Call</a>
+      <a href="#services" class="btn-ghost-white">View Our Work</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-mark">S</div>
+          Scribbling Arms
+        </a>
+        <p class="footer-desc">Banking innovation and digital excellence, united under one trusted company.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#">Banking Products</a></li>
+          <li><a href="#">Web Development</a></li>
+          <li><a href="#">Mobile Apps</a></li>
+          <li><a href="#">E-Commerce</a></li>
+          <li><a href="#">Cloud & DevOps</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Case Studies</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get in Touch</h5>
+        <ul>
+          <li><a href="#">hello@scribblingarms.com</a></li>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Twitter / X</a></li>
+          <li><a href="#">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Scribbling Arms. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 90);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id === '#') return;
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
